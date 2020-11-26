@@ -7,7 +7,7 @@ BUILD_DATE ?= $(shell date "$(DATE_FMT)")
 GO_LDFLAGS := -X github.com/psyllos/rally-cli/internal/build.Date=$(BUILD_DATE) $(GO_LDFLAGS)
 
 bin/rally: $(BUILD_FILES)
-	@go build -trimpath -ldflags "$(GO_LDFLAGS)" -o "$@" main.go
+	@go build -trimpath -ldflags "$(GO_LDFLAGS)" -o "$@" ./cmd/rally/
 
 clean:
 	rm -rf ./bin
