@@ -3,11 +3,12 @@ package release
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-// NewReleaseCmd creates a aliasCmd
-func NewReleaseCmd() *cobra.Command {
+// NewReleaseCmd creates a `release` command
+func NewReleaseCmd(cmdContext *context.CmdContext) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "release",
 		Short: "Manage releases",

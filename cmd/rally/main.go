@@ -2,10 +2,14 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/mitchellh/go-homedir"
+	"github.com/psyllos/rally-cli/internal/build"
+	"github.com/psyllos/rally-cli/pkg/client"
 	"github.com/psyllos/rally-cli/pkg/cmd/root"
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -13,9 +17,15 @@ import (
 var cfgFile string
 
 func main() {
+	buildDate := build.Date
+	buildVersion := build.Version
+
 	cobra.OnInitialize(initConfig)
 
-	rootCmd := root.NewRootCmd()
+	rallyAPI := client.NewClient(&http.Client{})
+	cmdContext := context.NewCmdContext(rallyAPI, buildVersion, buildDate)
+
+	rootCmd := root.NewRootCmd(cmdContext)
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.rally.yaml)")
 

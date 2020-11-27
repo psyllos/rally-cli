@@ -3,11 +3,12 @@ package attachment
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-// NewAttachmentCmd creates a aliasCmd
-func NewAttachmentCmd() *cobra.Command {
+// NewAttachmentCmd creates a `attachment` command
+func NewAttachmentCmd(cmdContext *context.CmdContext) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "attachment",
 		Short: "Manage attachments",

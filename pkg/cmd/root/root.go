@@ -10,38 +10,47 @@ import (
 	"github.com/psyllos/rally-cli/pkg/cmd/iteration"
 	"github.com/psyllos/rally-cli/pkg/cmd/project"
 	"github.com/psyllos/rally-cli/pkg/cmd/release"
+	"github.com/psyllos/rally-cli/pkg/cmd/status"
 	"github.com/psyllos/rally-cli/pkg/cmd/subscription"
 	"github.com/psyllos/rally-cli/pkg/cmd/task"
 	"github.com/psyllos/rally-cli/pkg/cmd/testcase"
 	"github.com/psyllos/rally-cli/pkg/cmd/user"
+	"github.com/psyllos/rally-cli/pkg/cmd/version"
 	"github.com/psyllos/rally-cli/pkg/cmd/workspace"
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-func NewRootCmd() *cobra.Command {
-	rootCmd := &cobra.Command{
+// NewRootCmd creates a `rally` command
+func NewRootCmd(cmdContext *context.CmdContext) *cobra.Command {
+
+	cmd := &cobra.Command{
 		Use:   "rally <command> <subcommands> [flags]",
 		Short: "Rally CLI",
-		Long:  `Rally is a CLI helping you to work seamlessly with Rally from the command line.`,
-		// Uncomment the following line if your bare application
-		// has an action associated with it:
-		//Run: func(cmd *cobra.Command, args []string) {},
+		Long:  `Rally is a CLI helping you to work seamlessly with CA Rally Software from the command line.`,
 	}
 
-	rootCmd.AddCommand(alias.NewAliasCmd())
-	rootCmd.AddCommand(attachment.NewAttachmentCmd())
-	rootCmd.AddCommand(config.NewConfigCmd())
-	rootCmd.AddCommand(defect.NewDefectCmd())
-	rootCmd.AddCommand(defectsuite.NewDefectSuiteCmd())
-	rootCmd.AddCommand(hierarchicalrequirement.NewHierarchicalRequirementCmd())
-	rootCmd.AddCommand(iteration.NewIterationCmd())
-	rootCmd.AddCommand(project.NewProjectCmd())
-	rootCmd.AddCommand(release.NewReleaseCmd())
-	rootCmd.AddCommand(subscription.NewSubscriptionCmd())
-	rootCmd.AddCommand(task.NewTaskCmd())
-	rootCmd.AddCommand(testcase.NewTestCaseCmd())
-	rootCmd.AddCommand(user.NewUserCmd())
-	rootCmd.AddCommand(workspace.NewWorkspaceCmd())
+	cmd.AddCommand(alias.NewAliasCmd(cmdContext))
+	cmd.AddCommand(attachment.NewAttachmentCmd(cmdContext))
+	cmd.AddCommand(config.NewConfigCmd(cmdContext))
+	cmd.AddCommand(defect.NewDefectCmd(cmdContext))
+	cmd.AddCommand(defectsuite.NewDefectSuiteCmd(cmdContext))
+	cmd.AddCommand(hierarchicalrequirement.NewHierarchicalRequirementCmd(cmdContext))
+	cmd.AddCommand(iteration.NewIterationCmd(cmdContext))
+	cmd.AddCommand(project.NewProjectCmd(cmdContext))
+	cmd.AddCommand(release.NewReleaseCmd(cmdContext))
+	cmd.AddCommand(status.NewStatusCmd(cmdContext))
+	cmd.AddCommand(subscription.NewSubscriptionCmd(cmdContext))
+	cmd.AddCommand(task.NewTaskCmd(cmdContext))
+	cmd.AddCommand(testcase.NewTestCaseCmd(cmdContext))
+	cmd.AddCommand(user.NewUserCmd(cmdContext))
+	cmd.AddCommand(workspace.NewWorkspaceCmd(cmdContext))
 
-	return rootCmd
+	formattedVersion := version.Format(cmdContext.Version, cmdContext.BuildDate)
+	cmd.SetVersionTemplate(formattedVersion)
+	cmd.Version = formattedVersion
+
+	cmd.AddCommand(version.NewCmdVersion(cmdContext))
+
+	return cmd
 }

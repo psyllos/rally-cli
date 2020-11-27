@@ -1,18 +1,19 @@
 package config
 
 import (
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-// NewConfigCmd creates a configCmd
-func NewConfigCmd() *cobra.Command {
+// NewConfigCmd creates a `config` command
+func NewConfigCmd(cmdContext *context.CmdContext) *cobra.Command {
 	configCmd := &cobra.Command{
 		Use:   "config",
 		Short: "Manage configuration for Rally CLI",
 	}
 
-	configCmd.AddCommand(NewGetCmd())
-	configCmd.AddCommand(NewSetCmd())
+	configCmd.AddCommand(NewGetCmd(cmdContext))
+	configCmd.AddCommand(NewSetCmd(cmdContext))
 
 	return configCmd
 }

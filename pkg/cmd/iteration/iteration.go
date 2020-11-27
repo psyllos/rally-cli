@@ -3,11 +3,12 @@ package iteration
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-// NewIterationCmd creates a aliasCmd
-func NewIterationCmd() *cobra.Command {
+// NewIterationCmd creates a `iteration` command
+func NewIterationCmd(cmdContext *context.CmdContext) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "iteration",
 		Short: "Manage iterations",

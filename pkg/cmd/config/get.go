@@ -3,11 +3,13 @@ package config
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
+
 	"github.com/spf13/cobra"
 )
 
 // NewGetCmd creates a `get` command
-func NewGetCmd() *cobra.Command {
+func NewGetCmd(cmdContext *context.CmdContext) *cobra.Command {
 	newGetCmd := &cobra.Command{
 		Use:   "get",
 		Short: "Print the value of a given configuration key",

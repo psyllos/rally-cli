@@ -3,11 +3,12 @@ package user
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-// NewUserCmd creates a aliasCmd
-func NewUserCmd() *cobra.Command {
+// NewUserCmd creates a `user` command
+func NewUserCmd(cmdContext *context.CmdContext) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "user",
 		Short: "Manage users",

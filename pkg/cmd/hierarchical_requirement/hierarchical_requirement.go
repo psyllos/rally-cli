@@ -3,11 +3,12 @@ package hierarchicalrequirement
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-// NewHierarchicalRequirementCmd creates a aliasCmd
-func NewHierarchicalRequirementCmd() *cobra.Command {
+// NewHierarchicalRequirementCmd creates a `hierarchical-requirement` command
+func NewHierarchicalRequirementCmd(cmdContext *context.CmdContext) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "hierarchical-requirement",
 		Short: "Manage hierarchical requirements",

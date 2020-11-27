@@ -3,11 +3,12 @@ package subscription
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
 	"github.com/spf13/cobra"
 )
 
-// NewSubscriptionCmd creates a aliasCmd
-func NewSubscriptionCmd() *cobra.Command {
+// NewSubscriptionCmd creates a `subscription` command
+func NewSubscriptionCmd(cmdContext *context.CmdContext) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "subscription",
 		Short: "Manage subscriptions",

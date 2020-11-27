@@ -3,12 +3,14 @@ package config
 import (
 	"fmt"
 
+	"github.com/psyllos/rally-cli/pkg/context"
+
 	"github.com/spf13/cobra"
 )
 
 // NewSetCmd creates a `set` command
-func NewSetCmd() *cobra.Command {
-	setCmd := &cobra.Command{
+func NewSetCmd(cmdContext *context.CmdContext) *cobra.Command {
+	cmd := &cobra.Command{
 		Use:   "set",
 		Short: "Print the value of a given configuration key",
 		Run: func(cmd *cobra.Command, args []string) {
@@ -16,5 +18,5 @@ func NewSetCmd() *cobra.Command {
 		},
 	}
 
-	return setCmd
+	return cmd
 }
