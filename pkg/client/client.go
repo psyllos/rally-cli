@@ -39,12 +39,17 @@ func NewClient(httpClient *http.Client) *Client {
 	}
 }
 
-func (c Client) GetCurrentUser() {
+func (c Client) GetCurrentWorkspace(data interface{}) error {
 
+	type res struct {
+		QueryResult QueryResult
+	}
+
+	return c.request("rally1.rallydev.com", "GET", "slm/webservice/v2.x/workspace?compact=true&fetch=true", nil, &data)
 }
 
 // Request does the HTTP Requests
-func (c Client) Request(hostname string, method string, p string, body io.Reader, data interface{}) error {
+func (c Client) request(hostname string, method string, p string, body io.Reader, data interface{}) error {
 
 	url := fmt.Sprintf("https://%s/%s", hostname, p)
 
