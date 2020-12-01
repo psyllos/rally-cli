@@ -1,10 +1,10 @@
 package dict
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/psyllos/rally-cli/pkg/context"
+	"github.com/psyllos/rally-cli/pkg/model"
 	"github.com/spf13/cobra"
 )
 
@@ -14,12 +14,17 @@ func NewBuildCmd(cmdContext *context.CmdContext) *cobra.Command {
 		Use:   "build",
 		Short: "Build the data dictionary",
 		Run: func(cmd *cobra.Command, args []string) {
-			var objmap map[string]json.RawMessage
-			if err := cmdContext.Client.GetCurrentWorkspace(&objmap); err != nil {
+
+			type res struct {
+				QueryResult model.QueryResult
+			}
+
+			var obj res
+			if err := cmdContext.Client.GetCurrentWorkspace(&obj); err != nil {
 				panic(err)
 			}
 
-			fmt.Printf("%v", objmap["QueryResult"])
+			fmt.Printf("%v", obj.QueryResult.Results[0]["_refObjectName"])
 		},
 	}
 

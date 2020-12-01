@@ -40,11 +40,6 @@ func NewClient(httpClient *http.Client) *Client {
 }
 
 func (c Client) GetCurrentWorkspace(data interface{}) error {
-
-	type res struct {
-		QueryResult QueryResult
-	}
-
 	return c.request("rally1.rallydev.com", "GET", "slm/webservice/v2.x/workspace?compact=true&fetch=true", nil, &data)
 }
 
